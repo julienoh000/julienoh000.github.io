@@ -6,6 +6,7 @@ body {
   background: #f5f3ef;
   color: #111;
   font-family: "Helvetica", sans-serif;
+  margin-left: 10%;
 }
 
 .section {
@@ -13,6 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-left: 10%;
 }
 
 .vertical-title {
@@ -27,27 +29,29 @@ body {
   position: absolute;
   right: 1rem;
   top: 5rem;
+  margin-right: 2%;
 }
 
 .name {
-  font-size: 2rem;
+  font-size: 1rem;
   font-family: "Albert Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
   color: brown;
+  margin-top: 2%;
 }
 
 .big-title {
   font-size: 3rem;
   font-weight: bold;
   color: brown;
-  margin: 0;
   font-family: "Albert Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
   margin-top: 50rem;
+  margin-left: 2%;
 }
 
 .circle-title {
@@ -79,6 +83,7 @@ img {
   font-weight: 400;
   font-style: normal;
   margin-top: 20rem;
+  margin-left: 2%;
 }
 
 h6 {
@@ -90,8 +95,28 @@ h6 {
 
 p {
   font-size: large;
+  margin-left: 30%;
 }
 
 li {
   font-size: large;
+}
+
+.section_concept {
+  width: 80%;
+  margin-left: 5%;
+}
+
+h2 {
+  margin-left: 2%;
+}
+
+.ques {
+  padding: 2rem;
+}
+
+.screenshot {
+  width: 50rem;
+  height: auto;
+  align-items: center;
 }
