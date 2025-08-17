@@ -6,6 +6,58 @@ body {
   background: #f5f3ef;
   color: #111;
   font-family: "Helvetica", sans-serif;
+  margin-left: 0 10%;
+}
+
+.intro {
+  position: relative;
+  padding-top: 2rem;
+}
+
+.name {
+  font-size: 1rem;
+  font-family: "Albert Sans", sans-serif;
+  font-weight: 400;
+  color: brown;
+  margin-left: 2%;
+}
+
+.circle-title {
+  position: absolute;
+  font-size: 16rem;
+  color: brown;
+  line-height: 1;
+  right: 10%;
+  top: 0;
+}
+
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 2rem;
+  font-family: "Albert Sans", sans-serif;
+  font-weight: 600;
+  color: brown;
+  position: absolute;
+  right: 1rem;
+  top: 5rem;
+}
+
+.title {
+  font-size: 3rem;
+  color: brown;
+  font-family: "Boldonse", system-ui;
+  font-weight: 400;
+  margin-top: 20rem;
+  margin-left: 5%;
+}
+
+.big-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: brown;
+  font-family: "Albert Sans", sans-serif;
+  margin-top: 30rem;
   margin-left: 10%;
 }
 
@@ -17,106 +69,49 @@ body {
   margin-left: 10%;
 }
 
-.vertical-title {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 2rem;
-  font-family: "Albert Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  color: brown;
-  position: absolute;
-  right: 1rem;
-  top: 5rem;
-  margin-right: 2%;
-}
-
-.name {
-  font-size: 1rem;
-  font-family: "Albert Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  color: brown;
-  margin-top: 2%;
-}
-
-.big-title {
-  font-size: 3rem;
-  font-weight: bold;
-  color: brown;
-  font-family: "Albert Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  margin-top: 50rem;
-  margin-left: 2%;
-}
-
-.circle-title {
-  position: absolute;
-  font-size: 16rem;
-  color: brown;
-  line-height: 1;
-  right: 10%;
-}
-
-.content {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-img {
-  max-width: 300px;
+.screenshot {
+  max-width: 70%;
   height: auto;
+  margin-left: 15%;
 }
 
-.title {
-  position: absolute;
-  font-size: 3rem;
-  color: brown;
-  line-height: 1;
-  left: 2rem;
-  font-family: "Boldonse", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  margin-top: 20rem;
-  margin-left: 2%;
-}
-
-h6 {
-  font-size: 2rem;
-  color: brown;
-  line-height: 1;
-  left: 2rem;
-}
-
-p {
-  font-size: large;
-  margin-left: 30%;
-}
-
-li {
-  font-size: large;
-}
-
-.section_concept {
+.section_ques {
   width: 80%;
   margin-left: 5%;
-}
-
-h2 {
-  margin-left: 2%;
+  margin-bottom: 15%;
 }
 
 .ques {
   padding: 2rem;
 }
 
-.screenshot {
-  width: 50rem;
-  height: auto;
-  align-items: center;
+.ques {
+  padding: 2rem 0;
+}
+
+.ques h2 {
+  margin-left: 12%;
+  font-family: "Albert Sans", sans-serif;
+}
+
+.ques p {
+  font-size: large;
+  margin-left: 13%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.ques li {
+  margin-left: 13%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: large;
+}
+
+h5 {
+  text-align: right;
+  margin-right: 15%;
+  color: grey;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
