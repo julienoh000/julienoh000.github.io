@@ -1,19 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Boldonse&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap");
-
 body {
   margin: 0;
   background: #f5f3ef;
   color: #111;
   font-family: "Helvetica", sans-serif;
-  margin-left: 10%;
+  margin-left: 0 10%;
 }
-
 .intro {
   position: relative;
   padding-top: 2rem;
 }
-
 .name {
   font-size: 1rem;
   font-family: "Albert Sans", sans-serif;
@@ -21,15 +18,14 @@ body {
   color: brown;
   margin-left: 2%;
 }
-
 .circle-title {
+  position: absolute;
   font-size: 16rem;
   color: brown;
   line-height: 1;
   right: 10%;
   top: 0;
 }
-
 .vertical-title {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -37,10 +33,10 @@ body {
   font-family: "Albert Sans", sans-serif;
   font-weight: 600;
   color: brown;
+  position: absolute;
   right: 1rem;
   top: 5rem;
 }
-
 .title {
   font-size: 3rem;
   color: brown;
@@ -49,7 +45,6 @@ body {
   margin-top: 20rem;
   margin-left: 5%;
 }
-
 .big-title {
   font-size: 3rem;
   font-weight: bold;
@@ -58,7 +53,6 @@ body {
   margin-top: 30rem;
   margin-left: 10%;
 }
-
 .section {
   padding: 5rem 3rem;
   display: flex;
@@ -66,35 +60,32 @@ body {
   gap: 2rem;
   margin-left: 10%;
 }
-
 .screenshot {
   max-width: 70%;
   height: auto;
   margin-left: 15%;
 }
-
 .section_ques {
   width: 80%;
   margin-left: 5%;
   margin-bottom: 15%;
 }
-
 .ques {
   padding: 2rem;
 }
-
+.ques {
+  padding: 2rem 0;
+}
 .ques h2 {
   margin-left: 12%;
   font-family: "Albert Sans", sans-serif;
 }
-
 .ques p {
   font-size: large;
   margin-left: 13%;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-
 .ques li {
   margin-left: 13%;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -103,7 +94,6 @@ body {
   padding-bottom: 2%;
   width: 85%;
 }
-
 h5 {
   text-align: right;
   margin-right: 15%;
