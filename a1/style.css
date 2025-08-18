@@ -70,19 +70,17 @@ body {
   margin-left: 5%;
   margin-bottom: 15%;
 }
-.ques {
-  padding: 2rem;
-}
+
 .ques {
   padding: 2rem 0;
 }
 .ques h2 {
-  margin-left: 12%;
+  margin-left: 13%;
   font-family: "Albert Sans", sans-serif;
 }
 .ques p {
   font-size: large;
-  margin-left: 13%;
+  margin-left: 14%;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   width: 85%;
