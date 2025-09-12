@@ -17,13 +17,15 @@ function addToCartTotal(item) {
 
 function calculateCart() {
   shoppingCart.forEach(addToCartTotal);
+  cartTotalText.textContent = cartTotal;
 }
 
 function checkDiscount() {
   if (cartTotal > 100) {
-    cartTotal - cartTotal * 0.9;
+    cartTotal = cartTotal * 0.9;
   }
-  cartTotalText.textContent - cartTotal;
+  console.log(cartTotal);
+  cartTotalText.textContent = cartTotal;
 }
 
 if (cartTotal > 100) {

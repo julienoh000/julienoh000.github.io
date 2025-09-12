@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JavaScript Practice</title>
+    <title>Shopping Cart App</title>
 
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="main.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <button onclick="calculateCart()">Calculate Total</button>
+    <button onclick="checkDiscount()">Apply Discount</button>
+    <p>Your total is: <span id="cartTotal">?</span></p>
+  </body>
 </html>

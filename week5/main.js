@@ -80,3 +80,12 @@ function tellMeHowHungryIAm() {
 }
 
 console.log(hiddenVariable);
+
+function addTwoNumbers(a, b) {
+  let addTotal = a + b;
+  return addTotal;
+}
+
+let numberTotal = addTwoNumbers(3, 4);
+let diffTotal = addTwoNumbers(12, 50);
+console.log(numberTotal, diffTotal);

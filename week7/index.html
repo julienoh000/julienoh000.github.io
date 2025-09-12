@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script defer src="main.js"></script>
+    <title>Audio Video Experiments</title>
+  </head>
+
+  <body>
+    <main>
+      <audio controls>
+        <source src="./assets/airport-1.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element
+      </audio>
+
+      <video controls width="320" height="240">
+        <source src="./assets/stardust-1.mp4" type="video/mp4" />
+        Your browser does not support the video element
+      </video>
+
+      <div class="outer">
+        <button id="popButton">Click me!</button>
+
+        <audio id="popAudio">
+          <source src="./assets/pop-1.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
+    </main>
+
+    <footer>
+      <a href="https://freesound.org/people/nevak36/sounds/727987/">airport</a>
+      by <a href="https://freesound.org/people/nevak36/">nevak36</a> | License:
+      <a href="http://creativecommons.org/publicdomain/zero/1.0/"
+        >Creative Commons 0</a
+      >
+      <a href="https://freesound.org/people/SunnySideSound/sounds/67094/"
+        >Pop_8.aif</a
+      >
+      by
+      <a href="https://freesound.org/people/SunnySideSound/">SunnySideSound</a>
+      | License:
+      <a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0</a>
+    </footer>
+  </body>
+</html>
