@@ -6,6 +6,24 @@ const timeLine = document.querySelector("#timelineProgress");
 /* when JS loads remove default controls 비디오 자체에 뜨는 디폴트 컨트롤 없애야함 */
 videoElement.removeAttribute("controls");
 
+// I want to ypdate toral time based on the currently loaded media file
+videoElement.addEventListener("canplay", updateTotalTime);
+
+function updateTimeline(){
+  let timePercent = (videoElement.currentTime / videoElement.duration) * 100;
+  timeline.value = timePercent;
+}
+
+function updateCurentTime(){
+  let videoseconds = videoElement.duration;
+  let totalMin = videoSeconds / 60;
+  let totalSec = videoSeconds % 60;
+  if(totalSec < 10) {
+    totalSec = "0" + totalSec;
+  }
+  console.log(totalMin, totalSec);
+  totalTimeText.textContent = '${totalMin}:${totalSec}';
+
 /* 
 Olay/pause button behaviour:
 if media is not playiing - when I click it bigins the playback of the media file
