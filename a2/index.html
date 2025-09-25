@@ -1,90 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="main.js" defer></script>
     <title>Focus Player — Study/Relax</title>
-</head>
-<body>
-  <!-- Background dots -->
-  <div class="ambient-bg" aria-hidden="true">
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-  </div>
+  </head>
+  <body>
+    <!-- Background dots -->
+    <div class="ambient-bg" aria-hidden="true">
+      <div class="floating-particle"></div>
+      <div class="floating-particle"></div>
+      <div class="floating-particle"></div>
+      <div class="floating-particle"></div>
+      <div class="floating-particle"></div>
+    </div>
 
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <h1 class="logo">Focus Player</h1>
-      <div class="theme-controls">
-        <button id="themeToggle" class="theme-btn" aria-label="Toggle dark mode" aria-pressed="false" type="button">🌙</button>
-      </div>
-    </header>
-
-    <!-- Player -->
-    <main class="player-section">
-      <!-- Left: Album -->
-      <section class="media-info">
-        <div class="album-art">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Crect width='560' height='560' rx='24' ry='24' fill='%23bfe8dc'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' font-family='Arial' font-size='24' fill='%230e2f28'%3EAlbum Cover%3C/text%3E%3C/svg%3E" alt="Album Art" id="albumArt">
-        </div>
-      </section>
-
-      <!-- Right: Info + Controls -->
-      <section class="right-col">
-        <div class="title-row">
-          <div class="titles">
-            <h2 class="track-title" id="trackTitle">Ambient Wave 56 — Study Session</h2>
-            <p class="track-artist" id="trackArtist">Erokia</p>
-          </div>
-          <button class="play-btn" id="playPauseBtn" aria-label="Play" type="button">
-            <!-- Play icon -->
-            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <!-- Pause icon -->
-            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="32" height="32" style="display:none">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="logo">Focus Player</h1>
+        <div class="theme-controls">
+          <button
+            id="themeToggle"
+            class="theme-btn"
+            aria-label="Toggle dark mode"
+            aria-pressed="false"
+            type="button"
+          >
+            🌙
           </button>
         </div>
+      </header>
 
-        <!-- Progress -->
-        <div class="progress-container">
-          <span class="time-display" id="currentTime">0:00</span>
-          <div class="progress-bar" id="progressBar" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="progress-fill" id="progressFill"></div>
+      <!-- Player -->
+      <main class="player-section">
+        <!-- Right: Info + Controls -->
+        <section class="right-col">
+          <div class="title-row">
+            <div class="titles">
+              <h2 class="track-title" id="trackTitle">
+                Ambient Wave 56 — Study Session
+              </h2>
+              <p class="track-artist" id="trackArtist">Erokia</p>
+            </div>
+            <button
+              class="play-btn"
+              id="playPauseBtn"
+              aria-label="Play"
+              type="button"
+            >
+              <!-- Play icon -->
+              <svg
+                id="playIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="white"
+                width="32"
+                height="32"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <!-- Pause icon -->
+              <svg
+                id="pauseIcon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="white"
+                width="32"
+                height="32"
+                style="display: none"
+              >
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            </button>
           </div>
-          <span class="time-display" id="totalTime">4:35</span>
-        </div>
 
-        <!-- Volume -->
-        <div class="volume-control">
-          <button class="volume-btn" id="muteBtn" aria-label="Mute" aria-pressed="false">🔊</button>
-          <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70" aria-label="Volume">
-        </div>
+          <!-- Progress -->
+          <div class="progress-container">
+            <span class="time-display" id="currentTime">0:00</span>
+            <div
+              class="progress-bar"
+              id="progressBar"
+              role="slider"
+              tabindex="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="time-display" id="totalTime">4:35</span>
+          </div>
 
-        <!-- Hidden audio -->
-        <audio id="audioPlayer" preload="metadata" crossorigin="anonymous">
-          <source src="https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/IM-2250/erokia_ambient-wave-56-msfxp7-78.mp3" type="audio/mpeg">
-        </audio>
-      </section>
-    </main>
+          <!-- Volume -->
+          <div class="volume-control">
+            <button
+              class="volume-btn"
+              id="muteBtn"
+              aria-label="Mute"
+              aria-pressed="false"
+            >
+              🔊
+            </button>
+            <input
+              type="range"
+              id="volumeSlider"
+              class="volume-slider"
+              min="0"
+              max="100"
+              value="70"
+              aria-label="Volume"
+            />
+          </div>
 
-    <!-- Attribution -->
-    <footer class="attribution">
-      <p>
-        Music: “Ambient Wave 56 (msfxp7-78)” by Erokia. Attribution:
-        <a href="https://github.com/p-mcmahon-rmit/p-mcmahon-rmit.github.io/blob/main/a2/attributions.html" target="_blank">RMIT A2 attribution page</a>.
-      </p>
-    </footer>
-  </div>
-</body>
+          <!-- Hidden audio -->
+          <audio id="audioPlayer" preload="metadata" crossorigin="anonymous">
+            <source
+              src="https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/IM-2250/erokia_ambient-wave-56-msfxp7-78.mp3"
+              type="audio/mpeg"
+            />
+          </audio>
+        </section>
+      </main>
+
+      <!-- Attribution -->
+      <footer class="attribution">
+        <p>
+          Music: “Ambient Wave 56 (msfxp7-78)” by Erokia. Attribution:
+          <a
+            href="https://github.com/p-mcmahon-rmit/p-mcmahon-rmit.github.io/blob/main/a2/attributions.html"
+            target="_blank"
+            >RMIT A2 attribution page</a
+          >.
+        </p>
+      </footer>
+    </div>
+  </body>
 </html>
