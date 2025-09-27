@@ -7,22 +7,15 @@
     <link rel="stylesheet" href="style.css" />
 
     <script src="main.js" defer></script>
-    <title>Focus Player — Study/Relax</title>
+    <title>Focus Player</title>
   </head>
   <body>
-    <!-- Background dots -->
-    <div class="ambient-bg" aria-hidden="true">
-      <div class="floating-particle"></div>
-      <div class="floating-particle"></div>
-      <div class="floating-particle"></div>
-      <div class="floating-particle"></div>
-      <div class="floating-particle"></div>
-    </div>
 
     <div class="container">
       <!-- Header -->
       <header class="header">
         <h1 class="logo">Focus Player</h1>
+          <!--  Theme changing button is positioned for easy access without disrupting main interface -->
         <div class="theme-controls">
           <button
             id="themeToggle"
@@ -31,14 +24,17 @@
             aria-pressed="false"
             type="button"
           >
-            🌙
+            🌃
           </button>
         </div>
       </header>
 
-      <!-- Player -->
+      <!-- Player 
+       Main player section optimized for study/focus 
+        Large, simple controls reduce cognitive load during focus sessions
+        -->
       <main class="player-section">
-        <!-- Right: Info + Controls -->
+        <!-- Info + Controls -->
         <section class="right-col">
           <div class="title-row">
             <div class="titles">
@@ -53,33 +49,14 @@
               aria-label="Play"
               type="button"
             >
-              <!-- Play icon -->
-              <svg
-                id="playIcon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="white"
-                width="32"
-                height="32"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              <!-- Pause icon -->
-              <svg
-                id="pauseIcon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="white"
-                width="32"
-                height="32"
-                style="display: none"
-              >
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-              </svg>
+              <span id="playIcon">▶</span>
+              <span id="pauseIcon" style="display: none">⏸</span>
             </button>
           </div>
 
-          <!-- Progress -->
+          <!-- Progress
+           Progress bar toggle can be dragged
+           Essential for navigation during long focus sessions -->
           <div class="progress-container">
             <span class="time-display" id="currentTime">0:00</span>
             <div
@@ -96,7 +73,9 @@
             <span class="time-display" id="totalTime">4:35</span>
           </div>
 
-          <!-- Volume -->
+          <!-- Volume 
+           Enhanced volume control with visual feedback
+           -->
           <div class="volume-control">
             <button
               class="volume-btn"
@@ -129,14 +108,15 @@
 
       <!-- Attribution -->
       <footer class="attribution">
-        <p>
-          Music: “Ambient Wave 56 (msfxp7-78)” by Erokia. Attribution:
-          <a
-            href="https://github.com/p-mcmahon-rmit/p-mcmahon-rmit.github.io/blob/main/a2/attributions.html"
-            target="_blank"
-            >RMIT A2 attribution page</a
-          >.
-        </p>
+      
+    <a target="_blank" rel="noopener noreferrer" href="https://freesound.org/people/Erokia/sounds/516902">Ambient Wave 56 - (MSfxP7 - 78)</a>" by 
+    <a target="_blank" rel="noopener noreferrer" href="https://freesound.org/people/Erokia">Erokia</a> is licensed under 
+    <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/?ref=openverse">CC BY-NC 4.0 
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img>
+    </a>
+
       </footer>
     </div>
   </body>

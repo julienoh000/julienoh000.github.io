@@ -48,18 +48,18 @@ playBtn.addEventListener("click", async () => {
     if (audio.paused) {
       await audio.play();
       playIcon.style.display = "none";
-      pauseIcon.style.display = "block";
+      pauseIcon.style.display = "inline";
       playBtn.setAttribute("aria-label", "Pause");
     } else {
       audio.pause();
-      playIcon.style.display = "block";
+      playIcon.style.display = "inline";
       pauseIcon.style.display = "none";
       playBtn.setAttribute("aria-label", "Play");
     }
   } catch (error) {
     console.error("Playback error:", error);
     // Reset to play state on error
-    playIcon.style.display = "block";
+    playIcon.style.display = "inline";
     pauseIcon.style.display = "none";
     playBtn.setAttribute("aria-label", "Play");
   }
@@ -67,7 +67,7 @@ playBtn.addEventListener("click", async () => {
 
 // Handle audio ended
 audio.addEventListener("ended", () => {
-  playIcon.style.display = "block";
+  playIcon.style.display = "inline";
   pauseIcon.style.display = "none";
   playBtn.setAttribute("aria-label", "Play");
 });
@@ -81,46 +81,16 @@ progressBar.addEventListener("click", (e) => {
   }
 });
 
-// Keyboard support for progress bar
-progressBar.addEventListener("keydown", (e) => {
-  if (!audio.duration) return;
-
-  const step = audio.duration * 0.05; // 5% steps
-  let newTime = audio.currentTime;
-
-  switch (e.key) {
-    case "ArrowLeft":
-      newTime = Math.max(0, audio.currentTime - step);
-      break;
-    case "ArrowRight":
-      newTime = Math.min(audio.duration, audio.currentTime + step);
-      break;
-    case "Home":
-      newTime = 0;
-      break;
-    case "End":
-      newTime = audio.duration;
-      break;
-    default:
-      return; // Don't prevent default for other keys
-  }
-
-  e.preventDefault();
-  audio.currentTime = newTime;
-});
-
 // Volume control
 volumeSlider.addEventListener("input", () => {
   const volume = volumeSlider.value / 100;
   audio.volume = volume;
   updateVolumeIcon(volume);
+  volumeSlider.style.setProperty("--volume-percent", volumeSlider.value + "%");
 });
-
-// Mute functionality
 muteBtn.addEventListener("click", () => {
   audio.muted = !audio.muted;
   updateVolumeIcon(audio.muted ? 0 : audio.volume);
-  muteBtn.setAttribute("aria-pressed", audio.muted.toString());
 });
 
 // Update volume icon based on volume level
@@ -138,14 +108,12 @@ function updateVolumeIcon(volume) {
 const applyTheme = (mode) => {
   if (mode === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
-    themeToggle.textContent = "☀️";
+    themeToggle.textContent = "🔆";
     themeToggle.setAttribute("aria-pressed", "true");
-    localStorage.setItem("theme", "dark");
   } else {
     document.documentElement.removeAttribute("data-theme");
-    themeToggle.textContent = "🌙";
+    themeToggle.textContent = "🌃";
     themeToggle.setAttribute("aria-pressed", "false");
-    localStorage.setItem("theme", "light");
   }
 };
 
@@ -156,16 +124,8 @@ themeToggle.addEventListener("click", () => {
 
 // Initialize theme from localStorage or system preference
 const initTheme = () => {
-  const saved = localStorage.getItem("theme");
-  if (saved) {
-    applyTheme(saved);
-  } else {
-    // Check system preference
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    applyTheme(prefersDark ? "dark" : "light");
-  }
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(prefersDark ? "dark" : "light");
 };
 
 // Initialize everything
@@ -178,7 +138,5 @@ document.addEventListener("DOMContentLoaded", () => {
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", (e) => {
-    if (!localStorage.getItem("theme")) {
-      applyTheme(e.matches ? "dark" : "light");
-    }
+    applyTheme(e.matches ? "dark" : "light");
   });
