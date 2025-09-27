@@ -10,7 +10,7 @@ const muteBtn = document.getElementById("muteBtn");
 const volumeSlider = document.getElementById("volumeSlider");
 const themeToggle = document.getElementById("themeToggle");
 
-// Format time helper
+// Time format
 const fmt = (t) => {
   if (!isFinite(t) || t < 0) return "0:00";
   const m = Math.floor(t / 60);
@@ -25,14 +25,14 @@ audio.addEventListener("loadedmetadata", () => {
   totalTimeEl.textContent = fmt(audio.duration);
 });
 
-// Handle loading errors
+// Loading errors
 audio.addEventListener("error", (e) => {
   console.error("Audio loading error:", e);
   currentTimeEl.textContent = "Error";
   totalTimeEl.textContent = "Error";
 });
 
-// Time update
+// Update time
 audio.addEventListener("timeupdate", () => {
   if (audio.duration) {
     const pct = (audio.currentTime / audio.duration) * 100;
@@ -65,7 +65,7 @@ playBtn.addEventListener("click", async () => {
   }
 });
 
-// Handle audio ended
+// Audio ended
 audio.addEventListener("ended", () => {
   playIcon.style.display = "inline";
   pauseIcon.style.display = "none";
@@ -81,7 +81,7 @@ progressBar.addEventListener("click", (e) => {
   }
 });
 
-// Volume control
+// Control Volume
 volumeSlider.addEventListener("input", () => {
   const volume = volumeSlider.value / 100;
   audio.volume = volume;
@@ -104,7 +104,7 @@ function updateVolumeIcon(volume) {
   }
 }
 
-// Theme functionality
+// Apply theme
 const applyTheme = (mode) => {
   if (mode === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");

@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 /* 
-     Aimed to create modern style ui design with simple layout to improve concentration.
-       The color palette emphasizes tranquility, supporting the study/relax context
-  Coolors was used to make colour palette.
+     Aimed to create modern style ui design with simple layout to improve concentration
+    The color palette emphasizes tranquility, supporting the study/relax context
+    Website named Coolors was used to make colour palette
        */
 
 :root {
@@ -109,8 +109,7 @@ body {
   right: 0;
 }
 
-/* Hover scaling provides tactile feedback for clear interaction
-       */
+/* Hover scaling provides tactile feedback for clear interaction  */
 
 .theme-btn {
   width: 44px;
@@ -200,8 +199,8 @@ body {
 }
 
 .play-btn #pauseIcon {
-  margin-left: 0px;
-  margin-bottom: 4px;
+  margin-left: 2px;
+  margin-top: 6px;
   margin-right: 1px;
   font-size: 50px;
 }
