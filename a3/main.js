@@ -103,3 +103,195 @@ function checkWhiskCircle(x, y) {
     }
   }
 }
+
+function stopDrag(e) {
+  if (!draggedElement) return;
+
+  const rect = draggedElement.getBoundingClientRect();
+  const bowl = document.getElementById("bowl").getBoundingClientRect();
+  const finalCup = document.getElementById("final-cup").getBoundingClientRect();
+
+  const currentItem = draggedElement.id;
+
+  if (currentItem === "kettle" && isOverlapping(rect, bowl)) {
+    updateBowl("water");
+    resetItemPosition(draggedElement);
+    nextStep();
+  } else if (currentItem === "spoon" && isOverlapping(rect, bowl)) {
+    updateBowl("powder");
+    resetItemPosition(draggedElement);
+    nextStep();
+  } else if (currentItem === "cup-item" && isOverlapping(rect, finalCup)) {
+    cupPlaced = true;
+    draggedElement.style.display = "none";
+    document.getElementById("coaster-placeholder").style.display = "none";
+    document.getElementById("final-cup-image").style.display = "block";
+    nextStep();
+  } else if (
+    currentItem === "ice" &&
+    cupPlaced &&
+    isOverlapping(rect, finalCup)
+  ) {
+    icePlaced = true;
+    draggedElement.style.display = "none";
+    document.getElementById("placed-cup").style.display = "none";
+    document.getElementById("cup-with-ice").style.display = "flex";
+    nextStep();
+  } else if (
+    currentItem === "milk" &&
+    icePlaced &&
+    isOverlapping(rect, finalCup)
+  ) {
+    milkPlaced = true;
+    draggedElement.style.display = "none";
+    document.getElementById("cup-with-ice").style.display = "none";
+    document.getElementById("cup-with-ice-milk").style.display = "flex";
+    nextStep();
+    document.getElementById("bowl").classList.add("draggable");
+    document.getElementById("bowl").style.cursor = "grab";
+  } else if (
+    currentItem === "bowl" &&
+    milkPlaced &&
+    isOverlapping(rect, finalCup)
+  ) {
+    // Hide all previous elements and show completed latte
+    document.getElementById("placed-cup").style.display = "none";
+    document.getElementById("cup-with-ice").style.display = "none";
+    document.getElementById("cup-with-ice-milk").style.display = "none";
+    document.getElementById("completed-latte").style.display = "flex";
+
+    // Reset bowl position
+    resetItemPosition(draggedElement);
+
+    // Show completion message
+    setTimeout(() => {
+      showComplete();
+    }, 600);
+  } else {
+    resetItemPosition(draggedElement);
+  }
+
+  document.removeEventListener("mousemove", drag);
+  document.removeEventListener("mouseup", stopDrag);
+  draggedElement = null;
+}
+
+function resetItemPosition(element) {
+  const positions = {
+    kettle: { left: "40px", top: "120px" },
+    spoon: { left: "40px", top: "230px" },
+    whisk: { left: "40px", top: "340px" },
+    "cup-item": { right: "40px", top: "120px", left: "auto" },
+    ice: { right: "40px", top: "250px", left: "auto" },
+    milk: { right: "40px", top: "330px", left: "auto" },
+    bowl: {
+      left: "50%",
+      top: "35%",
+      right: "auto",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
+  const pos = positions[element.id];
+  if (pos) {
+    element.style.left = pos.left || "";
+    element.style.right = pos.right || "";
+    element.style.top = pos.top;
+    element.style.transform = pos.transform || "";
+  }
+}
+
+function isOverlapping(rect1, rect2) {
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+  );
+}
+
+function updateBowl(state) {
+  const bowl = document.getElementById("bowl");
+  const stateTexts = {
+    water: "Bowl with<br>Water PNG",
+    powder: "Bowl with<br>Powder PNG",
+    mixed: "Mixed<br>Bowl PNG",
+  };
+  bowl.innerHTML = stateTexts[state] || "Empty<br>Bowl PNG";
+}
+
+function nextStep() {
+  const current = steps[currentStep];
+
+  // Disable current item
+  if (current.item !== "bowl") {
+    document.getElementById(current.item).classList.add("disabled");
+  }
+
+  currentStep++;
+  if (currentStep < steps.length) {
+    const next = steps[currentStep];
+
+    // Enable next item
+    const nextElement = document.getElementById(next.item);
+    if (nextElement) {
+      nextElement.classList.remove("disabled");
+    }
+
+    document.getElementById("instruction").textContent = next.instruction;
+  }
+}
+
+function showComplete() {
+  const msg = document.getElementById("complete-message");
+  msg.classList.add("show");
+}
+
+function resetGame() {
+  // Reset variables
+  currentStep = 0;
+  whiskCircleProgress = 0;
+  cupPlaced = false;
+  icePlaced = false;
+  milkPlaced = false;
+
+  // Hide complete message
+  document.getElementById("complete-message").classList.remove("show");
+
+  // Reset bowl
+  const bowl = document.getElementById("bowl");
+  bowl.innerHTML = "Empty<br>Bowl PNG";
+  bowl.classList.remove("draggable");
+  bowl.style.cursor = "";
+  bowl.style.left = "50%";
+  bowl.style.top = "35%";
+  bowl.style.transform = "translate(-50%, -50%)";
+  bowl.style.right = "";
+
+  // Reset final cup
+  document.getElementById("coaster-placeholder").style.display = "flex";
+  document.getElementById("final-cup-image").style.display = "none";
+  document.getElementById("placed-cup").style.display = "flex";
+  document.getElementById("cup-with-ice").style.display = "none";
+  document.getElementById("cup-with-ice-milk").style.display = "none";
+  document.getElementById("completed-latte").style.display = "none";
+
+  // Reset all items - show and enable only kettle
+  const allItems = ["kettle", "spoon", "whisk", "cup-item", "ice", "milk"];
+  allItems.forEach((id) => {
+    const el = document.getElementById(id);
+    el.style.display = "block";
+    if (id === "kettle") {
+      el.classList.remove("disabled");
+    } else {
+      el.classList.add("disabled");
+    }
+    resetItemPosition(el);
+  });
+
+  // Reset instruction
+  document.getElementById("instruction").textContent = steps[0].instruction;
+}
+
+document.addEventListener("mousedown", initDrag);
+document.getElementById("reset-button").addEventListener("click", resetGame);
