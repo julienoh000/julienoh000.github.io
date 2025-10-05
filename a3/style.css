@@ -15,8 +15,8 @@ body {
 }
 
 #game-container {
-  width: 1000px;
-  height: 700px;
+  width: 1400px;
+  height: 900px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -42,6 +42,9 @@ body {
 .draggable {
   position: absolute;
   cursor: grab;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
 .draggable:active {
@@ -53,54 +56,51 @@ body {
   transform: none !important;
 }
 
-.item-placeholder {
-  background: #e0e0e0;
-  border: 3px dashed #9e9e9e;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #757575;
-  font-size: 11px;
-  text-align: center;
-  font-weight: bold;
-}
-
-/* Center bowl */
+/* Center bowl - 2x size */
 #bowl {
-  width: 220px;
-  height: 220px;
+  width: 440px;
+  height: 440px;
   position: absolute;
-  left: calc(50% - 110px);
-  top: calc(35% - 110px);
+  left: calc(50% - 220px);
+  top: calc(35% - 220px);
+  background-image: url("assets/bowl_empty.png");
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
-/* Final cup position - below center bowl */
+/* Final cup position - below center bowl - 2x size */
 #final-cup {
-  width: 180px;
-  height: 220px;
+  width: 360px;
+  height: 440px;
   position: absolute;
-  left: calc(50% - 90px);
-  bottom: 50px;
+  left: calc(50% - 180px);
+  bottom: 80px;
 }
 
-.coaster-base {
-  width: 180px;
-  height: 50px;
-  background: #d7ccc8;
-  border: 3px solid #8d6e63;
-  border-radius: 50%;
+#coaster-placeholder {
+  width: 360px;
+  height: 100px;
   position: absolute;
   bottom: 0;
   left: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #6d4c41;
-  font-size: 11px;
-  text-align: center;
-  font-weight: bold;
+  background-image: url("assets/coaster.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#coaster-base {
+  width: 360px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-image: url("assets/coaster.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
 }
 
 #final-cup-image {
@@ -110,21 +110,18 @@ body {
   position: relative;
 }
 
-.cup-image {
-  width: 150px;
-  height: 170px;
-  background: #e0e0e0;
-  border: 3px dashed #9e9e9e;
-  border-radius: 10px;
+#placed-cup,
+#cup-with-ice,
+#cup-with-ice-milk,
+#completed-latte {
+  width: 300px;
+  height: 340px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   display: none;
-  justify-content: center;
-  align-items: center;
-  color: #757575;
-  font-size: 11px;
-  text-align: center;
-  font-weight: bold;
   position: absolute;
-  top: 50px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -132,56 +129,77 @@ body {
 
 #placed-cup {
   display: flex;
+  background-image: url("assets/cup_empty.png");
 }
 
-/* Left side tools - vertical layout */
+#cup-with-ice {
+  background-image: url("assets/cup_with_ice.png");
+}
+
+#cup-with-ice-milk {
+  background-image: url("assets/cup_with_ice_milk.png");
+}
+
+#completed-latte {
+  background-image: url("assets/completed_latte.png");
+}
+
+/* Left side tools - vertical layout - 2x size */
 #kettle {
-  width: 110px;
-  height: 90px;
+  width: 220px;
+  height: 180px;
   left: 40px;
   top: 120px;
+  background-image: url("assets/kettle.png");
+  display: block !important;
 }
 
 #spoon {
-  width: 70px;
-  height: 90px;
+  width: 140px;
+  height: 180px;
   left: 40px;
-  top: 230px;
+  top: 320px;
+  background-image: url("assets/spoon.png");
+  display: block !important;
 }
 
 #whisk {
-  width: 70px;
-  height: 90px;
+  width: 140px;
+  height: 180px;
   left: 40px;
-  top: 340px;
+  top: 520px;
+  background-image: url("assets/whisk.png");
+  display: block !important;
 }
 
-/* Right side ingredients - vertical layout */
+/* Right side ingredients - vertical layout - 2x size */
 #cup-item {
-  width: 90px;
-  height: 110px;
-  left: calc(100% - 130px);
+  width: 180px;
+  height: 220px;
+  left: calc(100% - 220px);
   top: 120px;
+  background-image: url("assets/cup.png");
+  display: block !important;
 }
 
 #ice {
-  width: 60px;
-  height: 60px;
-  left: calc(100% - 100px);
-  top: 250px;
+  width: 120px;
+  height: 120px;
+  left: calc(100% - 160px);
+  top: 360px;
+  background-image: url("assets/ice.png");
+  display: block !important;
 }
 
 #milk {
-  width: 70px;
-  height: 100px;
-  left: calc(100% - 110px);
-  top: 330px;
+  width: 140px;
+  height: 200px;
+  left: calc(100% - 180px);
+  top: 500px;
+  background-image: url("assets/milk.png");
+  display: block !important;
 }
 
-.disabled {
-  opacity: 0.3;
-  cursor: not-allowed !important;
-}
 @keyframes celebrate {
   0% {
     transform: translate(-50%, -50%) scale(0) rotate(-10deg);
@@ -240,6 +258,6 @@ body {
 }
 
 .disabled {
-  opacity: 0.3;
+  opacity: 0.5;
   cursor: not-allowed !important;
 }

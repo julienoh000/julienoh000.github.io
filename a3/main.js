@@ -198,12 +198,12 @@ function stopDrag(e) {
 function resetItemPosition(element) {
   const positions = {
     kettle: { left: "40px", top: "120px" },
-    spoon: { left: "40px", top: "230px" },
-    whisk: { left: "40px", top: "340px" },
-    "cup-item": { left: "calc(100% - 130px)", top: "120px" },
-    ice: { left: "calc(100% - 100px)", top: "250px" },
-    milk: { left: "calc(100% - 110px)", top: "330px" },
-    bowl: { left: "calc(50% - 110px)", top: "calc(35% - 110px)" },
+    spoon: { left: "40px", top: "320px" },
+    whisk: { left: "40px", top: "520px" },
+    "cup-item": { left: "calc(100% - 220px)", top: "120px" },
+    ice: { left: "calc(100% - 160px)", top: "360px" },
+    milk: { left: "calc(100% - 180px)", top: "500px" },
+    bowl: { left: "calc(50% - 220px)", top: "calc(35% - 220px)" },
   };
 
   const pos = positions[element.id];
@@ -226,12 +226,17 @@ function isOverlapping(rect1, rect2) {
 
 function updateBowl(state) {
   const bowl = document.getElementById("bowl");
-  const stateTexts = {
-    water: "Bowl with<br>Water PNG",
-    powder: "Bowl with<br>Powder PNG",
-    mixed: "Mixed<br>Bowl PNG",
+  const stateImages = {
+    water: "assets/bowl_water.png",
+    powder: "assets/bowl_powder.png",
+    mixed: "assets/bowl_mixed.png",
   };
-  bowl.innerHTML = stateTexts[state] || "Empty<br>Bowl PNG";
+
+  if (stateImages[state]) {
+    bowl.style.backgroundImage = `url('${stateImages[state]}')`;
+  } else {
+    bowl.style.backgroundImage = `url('assets/bowl_empty.png')`;
+  }
 }
 
 function nextStep() {
@@ -272,35 +277,49 @@ function resetGame() {
   // Hide complete message
   document.getElementById("complete-message").classList.remove("show");
 
-  // Reset bowl
+  // Reset bowl - remove all inline styles first
   const bowl = document.getElementById("bowl");
-  bowl.innerHTML = "Empty<br>Bowl PNG";
+  bowl.removeAttribute("style");
+  bowl.style.backgroundImage = 'url("assets/bowl_empty.png")';
   bowl.classList.remove("draggable");
-  bowl.style.cursor = "";
-  bowl.style.left = "calc(50% - 110px)";
-  bowl.style.top = "calc(35% - 110px)";
-  bowl.style.transform = "";
-  bowl.style.right = "";
 
   // Reset final cup
-  document.getElementById("coaster-placeholder").style.display = "flex";
+  document.getElementById("coaster-placeholder").style.display = "block";
   document.getElementById("final-cup-image").style.display = "none";
   document.getElementById("placed-cup").style.display = "flex";
   document.getElementById("cup-with-ice").style.display = "none";
   document.getElementById("cup-with-ice-milk").style.display = "none";
   document.getElementById("completed-latte").style.display = "none";
 
-  // Reset all items - show and enable only kettle
+  // Reset all items - remove inline styles and reset positions
   const allItems = ["kettle", "spoon", "whisk", "cup-item", "ice", "milk"];
   allItems.forEach((id) => {
     const el = document.getElementById(id);
+    el.removeAttribute("style");
     el.style.display = "block";
+
     if (id === "kettle") {
       el.classList.remove("disabled");
     } else {
       el.classList.add("disabled");
     }
-    resetItemPosition(el);
+
+    // Re-apply CSS positions
+    if (id === "kettle")
+      el.style.cssText = "display: block; left: 40px; top: 120px;";
+    if (id === "spoon")
+      el.style.cssText = "display: block; left: 40px; top: 320px;";
+    if (id === "whisk")
+      el.style.cssText = "display: block; left: 40px; top: 520px;";
+    if (id === "cup-item")
+      el.style.cssText =
+        "display: block; left: calc(100% - 220px); top: 120px;";
+    if (id === "ice")
+      el.style.cssText =
+        "display: block; left: calc(100% - 160px); top: 360px;";
+    if (id === "milk")
+      el.style.cssText =
+        "display: block; left: calc(100% - 180px); top: 500px;";
   });
 
   // Reset instruction
