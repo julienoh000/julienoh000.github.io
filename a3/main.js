@@ -50,9 +50,24 @@ function initDrag(e) {
   }
 
   draggedElement = target;
+  draggedElement.classList.add("dragging");
+
+  // Get the container position
+  const container = document.getElementById("game-container");
+  const containerRect = container.getBoundingClientRect();
+
+  // Calculate mouse position relative to container
+  const mouseX = e.clientX - containerRect.left;
+  const mouseY = e.clientY - containerRect.top;
+
+  // Get current element position
   const rect = draggedElement.getBoundingClientRect();
-  offsetX = e.clientX - rect.left;
-  offsetY = e.clientY - rect.top;
+  const elementX = rect.left - containerRect.left;
+  const elementY = rect.top - containerRect.top;
+
+  // Calculate offset
+  offsetX = mouseX - elementX;
+  offsetY = mouseY - elementY;
 
   document.addEventListener("mousemove", drag);
   document.addEventListener("mouseup", stopDrag);
@@ -66,25 +81,27 @@ function initDrag(e) {
 function drag(e) {
   if (!draggedElement) return;
 
-  const x = e.clientX - offsetX;
-  const y = e.clientY - offsetY;
+  // Get the container position
+  const container = document.getElementById("game-container");
+  const containerRect = container.getBoundingClientRect();
 
-  draggedElement.style.left = x + "px";
-  draggedElement.style.top = y + "px";
+  // Calculate mouse position relative to container
+  const mouseX = e.clientX - containerRect.left;
+  const mouseY = e.clientY - containerRect.top;
+
+  // Calculate new element position
+  const newX = mouseX - offsetX;
+  const newY = mouseY - offsetY;
+
+  // Set position
+  draggedElement.style.left = newX + "px";
+  draggedElement.style.top = newY + "px";
+  draggedElement.style.right = "";
+  draggedElement.style.transform = "";
 
   if (draggedElement.id === "whisk" && currentStep === 2) {
-    createWhiskTrail(e.clientX, e.clientY);
     checkWhiskCircle(e.clientX, e.clientY);
   }
-}
-
-function createWhiskTrail(x, y) {
-  const trail = document.createElement("div");
-  trail.className = "whisk-trail";
-  trail.style.left = x + "px";
-  trail.style.top = y + "px";
-  document.getElementById("game-container").appendChild(trail);
-  setTimeout(() => trail.remove(), 500);
 }
 
 function checkWhiskCircle(x, y) {
@@ -106,6 +123,8 @@ function checkWhiskCircle(x, y) {
 
 function stopDrag(e) {
   if (!draggedElement) return;
+
+  draggedElement.classList.remove("dragging");
 
   const rect = draggedElement.getBoundingClientRect();
   const bowl = document.getElementById("bowl").getBoundingClientRect();
@@ -181,23 +200,18 @@ function resetItemPosition(element) {
     kettle: { left: "40px", top: "120px" },
     spoon: { left: "40px", top: "230px" },
     whisk: { left: "40px", top: "340px" },
-    "cup-item": { right: "40px", top: "120px", left: "auto" },
-    ice: { right: "40px", top: "250px", left: "auto" },
-    milk: { right: "40px", top: "330px", left: "auto" },
-    bowl: {
-      left: "50%",
-      top: "35%",
-      right: "auto",
-      transform: "translate(-50%, -50%)",
-    },
+    "cup-item": { left: "calc(100% - 130px)", top: "120px" },
+    ice: { left: "calc(100% - 100px)", top: "250px" },
+    milk: { left: "calc(100% - 110px)", top: "330px" },
+    bowl: { left: "calc(50% - 110px)", top: "calc(35% - 110px)" },
   };
 
   const pos = positions[element.id];
   if (pos) {
-    element.style.left = pos.left || "";
-    element.style.right = pos.right || "";
+    element.style.left = pos.left;
+    element.style.right = "";
     element.style.top = pos.top;
-    element.style.transform = pos.transform || "";
+    element.style.transform = "";
   }
 }
 
@@ -263,9 +277,9 @@ function resetGame() {
   bowl.innerHTML = "Empty<br>Bowl PNG";
   bowl.classList.remove("draggable");
   bowl.style.cursor = "";
-  bowl.style.left = "50%";
-  bowl.style.top = "35%";
-  bowl.style.transform = "translate(-50%, -50%)";
+  bowl.style.left = "calc(50% - 110px)";
+  bowl.style.top = "calc(35% - 110px)";
+  bowl.style.transform = "";
   bowl.style.right = "";
 
   // Reset final cup
