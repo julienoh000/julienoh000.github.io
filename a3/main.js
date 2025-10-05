@@ -8,6 +8,7 @@ let whiskStartX = 0,
 let cupPlaced = false;
 let icePlaced = false;
 let milkPlaced = false;
+let matchaPoured = false;
 
 const steps = [
   {
@@ -26,7 +27,7 @@ const steps = [
     bowlState: "mixed",
   },
   {
-    item: "cup-item",
+    item: "empty-cup",
     instruction: "Bring the empty cup to the coaster!",
     bowlState: "mixed",
   },
@@ -35,6 +36,11 @@ const steps = [
   {
     item: "bowl",
     instruction: "Pour matcha from the bowl into the cup!",
+    bowlState: "mixed",
+  },
+  {
+    item: "straw",
+    instruction: "Add a straw to complete your matcha latte!",
     bowlState: "mixed",
   },
 ];
@@ -52,20 +58,16 @@ function initDrag(e) {
   draggedElement = target;
   draggedElement.classList.add("dragging");
 
-  // Get the container position
   const container = document.getElementById("game-container");
   const containerRect = container.getBoundingClientRect();
 
-  // Calculate mouse position relative to container
   const mouseX = e.clientX - containerRect.left;
   const mouseY = e.clientY - containerRect.top;
 
-  // Get current element position
   const rect = draggedElement.getBoundingClientRect();
   const elementX = rect.left - containerRect.left;
   const elementY = rect.top - containerRect.top;
 
-  // Calculate offset
   offsetX = mouseX - elementX;
   offsetY = mouseY - elementY;
 
@@ -81,19 +83,15 @@ function initDrag(e) {
 function drag(e) {
   if (!draggedElement) return;
 
-  // Get the container position
   const container = document.getElementById("game-container");
   const containerRect = container.getBoundingClientRect();
 
-  // Calculate mouse position relative to container
   const mouseX = e.clientX - containerRect.left;
   const mouseY = e.clientY - containerRect.top;
 
-  // Calculate new element position
   const newX = mouseX - offsetX;
   const newY = mouseY - offsetY;
 
-  // Set position
   draggedElement.style.left = newX + "px";
   draggedElement.style.top = newY + "px";
   draggedElement.style.right = "";
@@ -140,11 +138,16 @@ function stopDrag(e) {
     updateBowl("powder");
     resetItemPosition(draggedElement);
     nextStep();
-  } else if (currentItem === "cup-item" && isOverlapping(rect, finalCup)) {
+  } else if (currentItem === "empty-cup" && isOverlapping(rect, finalCup)) {
     cupPlaced = true;
-    draggedElement.style.display = "none";
+    draggedElement.style.visibility = "hidden";
     document.getElementById("coaster-placeholder").style.display = "none";
     document.getElementById("final-cup-image").style.display = "block";
+
+    const cupEmpty = document.getElementById("cup-empty");
+    cupEmpty.style.display = "block";
+    cupEmpty.classList.add("cup-state");
+
     nextStep();
   } else if (
     currentItem === "ice" &&
@@ -152,9 +155,13 @@ function stopDrag(e) {
     isOverlapping(rect, finalCup)
   ) {
     icePlaced = true;
-    draggedElement.style.display = "none";
-    document.getElementById("placed-cup").style.display = "none";
-    document.getElementById("cup-with-ice").style.display = "flex";
+    draggedElement.style.visibility = "hidden";
+    document.getElementById("cup-empty").style.display = "none";
+
+    const cupWithIce = document.getElementById("cup-with-ice");
+    cupWithIce.style.display = "block";
+    cupWithIce.classList.add("cup-state");
+
     nextStep();
   } else if (
     currentItem === "milk" &&
@@ -162,9 +169,13 @@ function stopDrag(e) {
     isOverlapping(rect, finalCup)
   ) {
     milkPlaced = true;
-    draggedElement.style.display = "none";
+    draggedElement.style.visibility = "hidden";
     document.getElementById("cup-with-ice").style.display = "none";
-    document.getElementById("cup-with-ice-milk").style.display = "flex";
+
+    const cupWithIceMilk = document.getElementById("cup-with-ice-milk");
+    cupWithIceMilk.style.display = "block";
+    cupWithIceMilk.classList.add("cup-state");
+
     nextStep();
     document.getElementById("bowl").classList.add("draggable");
     document.getElementById("bowl").style.cursor = "grab";
@@ -173,16 +184,32 @@ function stopDrag(e) {
     milkPlaced &&
     isOverlapping(rect, finalCup)
   ) {
-    // Hide all previous elements and show completed latte
-    document.getElementById("placed-cup").style.display = "none";
-    document.getElementById("cup-with-ice").style.display = "none";
+    matchaPoured = true;
     document.getElementById("cup-with-ice-milk").style.display = "none";
-    document.getElementById("completed-latte").style.display = "flex";
 
-    // Reset bowl position
+    const completedLatte = document.getElementById("completed-latte");
+    completedLatte.style.display = "block";
+    completedLatte.classList.add("cup-state");
+
+    // 그릇을 빈 그릇으로 변경
+    updateBowl("empty");
+
     resetItemPosition(draggedElement);
+    nextStep();
+  } else if (
+    currentItem === "straw" &&
+    matchaPoured &&
+    isOverlapping(rect, finalCup)
+  ) {
+    draggedElement.style.visibility = "hidden";
+    document.getElementById("completed-latte").style.display = "none";
 
-    // Show completion message
+    const completedLatteWithStraw = document.getElementById(
+      "completed-latte-with-straw"
+    );
+    completedLatteWithStraw.style.display = "block";
+    completedLatteWithStraw.classList.add("cup-state");
+
     setTimeout(() => {
       showComplete();
     }, 600);
@@ -197,17 +224,19 @@ function stopDrag(e) {
 
 function resetItemPosition(element) {
   const positions = {
-    kettle: { left: "40px", top: "120px" },
-    spoon: { left: "40px", top: "320px" },
-    whisk: { left: "40px", top: "520px" },
-    "cup-item": { left: "calc(100% - 220px)", top: "120px" },
+    kettle: { left: "40px", top: "100px" },
+    spoon: { left: "40px", top: "300px" },
+    whisk: { left: "40px", top: "500px" },
+    "empty-cup": { left: "calc(100% - 220px)", top: "120px" },
     ice: { left: "calc(100% - 160px)", top: "360px" },
     milk: { left: "calc(100% - 180px)", top: "500px" },
+    straw: { left: "calc(100% - 200px)", top: "650px" },
     bowl: { left: "calc(50% - 220px)", top: "calc(35% - 220px)" },
   };
 
   const pos = positions[element.id];
   if (pos) {
+    element.style.position = "absolute";
     element.style.left = pos.left;
     element.style.right = "";
     element.style.top = pos.top;
@@ -230,6 +259,7 @@ function updateBowl(state) {
     water: "assets/bowl_water.png",
     powder: "assets/bowl_powder.png",
     mixed: "assets/bowl_mixed.png",
+    empty: "assets/bowl_empty.png",
   };
 
   if (stateImages[state]) {
@@ -242,7 +272,6 @@ function updateBowl(state) {
 function nextStep() {
   const current = steps[currentStep];
 
-  // Disable current item
   if (current.item !== "bowl") {
     document.getElementById(current.item).classList.add("disabled");
   }
@@ -251,7 +280,6 @@ function nextStep() {
   if (currentStep < steps.length) {
     const next = steps[currentStep];
 
-    // Enable next item
     const nextElement = document.getElementById(next.item);
     if (nextElement) {
       nextElement.classList.remove("disabled");
@@ -267,35 +295,41 @@ function showComplete() {
 }
 
 function resetGame() {
-  // Reset variables
   currentStep = 0;
   whiskCircleProgress = 0;
   cupPlaced = false;
   icePlaced = false;
   milkPlaced = false;
+  matchaPoured = false;
 
-  // Hide complete message
   document.getElementById("complete-message").classList.remove("show");
 
-  // Reset bowl - remove all inline styles first
   const bowl = document.getElementById("bowl");
   bowl.removeAttribute("style");
   bowl.style.backgroundImage = 'url("assets/bowl_empty.png")';
   bowl.classList.remove("draggable");
 
-  // Reset final cup
   document.getElementById("coaster-placeholder").style.display = "block";
   document.getElementById("final-cup-image").style.display = "none";
-  document.getElementById("placed-cup").style.display = "flex";
+  document.getElementById("cup-empty").style.display = "none";
   document.getElementById("cup-with-ice").style.display = "none";
   document.getElementById("cup-with-ice-milk").style.display = "none";
   document.getElementById("completed-latte").style.display = "none";
+  document.getElementById("completed-latte-with-straw").style.display = "none";
 
-  // Reset all items - remove inline styles and reset positions
-  const allItems = ["kettle", "spoon", "whisk", "cup-item", "ice", "milk"];
+  const allItems = [
+    "kettle",
+    "spoon",
+    "whisk",
+    "empty-cup",
+    "ice",
+    "milk",
+    "straw",
+  ];
   allItems.forEach((id) => {
     const el = document.getElementById(id);
     el.removeAttribute("style");
+    el.style.visibility = "visible";
     el.style.display = "block";
 
     if (id === "kettle") {
@@ -304,25 +338,24 @@ function resetGame() {
       el.classList.add("disabled");
     }
 
-    // Re-apply CSS positions
-    if (id === "kettle")
-      el.style.cssText = "display: block; left: 40px; top: 120px;";
-    if (id === "spoon")
-      el.style.cssText = "display: block; left: 40px; top: 320px;";
-    if (id === "whisk")
-      el.style.cssText = "display: block; left: 40px; top: 520px;";
-    if (id === "cup-item")
-      el.style.cssText =
-        "display: block; left: calc(100% - 220px); top: 120px;";
-    if (id === "ice")
-      el.style.cssText =
-        "display: block; left: calc(100% - 160px); top: 360px;";
-    if (id === "milk")
-      el.style.cssText =
-        "display: block; left: calc(100% - 180px); top: 500px;";
+    const positions = {
+      kettle:
+        "position: absolute; display: block; visibility: visible; left: 40px; top: 100px;",
+      spoon:
+        "position: absolute; display: block; visibility: visible; left: 40px; top: 300px;",
+      whisk:
+        "position: absolute; display: block; visibility: visible; left: 40px; top: 500px;",
+      "empty-cup":
+        "position: absolute; display: block; visibility: visible; left: calc(100% - 220px); top: 120px;",
+      ice: "position: absolute; display: block; visibility: visible; left: calc(100% - 160px); top: 360px;",
+      milk: "position: absolute; display: block; visibility: visible; left: calc(100% - 180px); top: 500px;",
+      straw:
+        "position: absolute; display: block; visibility: visible; left: calc(100% - 200px); top: 650px;",
+    };
+
+    el.style.cssText = positions[id];
   });
 
-  // Reset instruction
   document.getElementById("instruction").textContent = steps[0].instruction;
 }
 

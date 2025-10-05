@@ -11,33 +11,35 @@
     <div id="game-container">
       <div id="instruction">Pour water into the bowl with the kettle!</div>
 
-      <!-- Center bowl (state-based images) -->
-      <div id="bowl" class="draggable"></div>
+      <!-- Center bowl -->
+      <div id="bowl"></div>
 
-      <!-- Left side tools (all visible from start) -->
+      <!-- Left side tools -->
       <div id="kettle" class="draggable"></div>
       <div id="spoon" class="draggable disabled"></div>
       <div id="whisk" class="draggable disabled"></div>
 
-      <!-- Right side ingredients (all visible from start) -->
-      <div id="cup-item" class="draggable disabled"></div>
+      <!-- Right side ingredients -->
+      <div id="empty-cup" class="draggable disabled"></div>
       <div id="ice" class="draggable disabled"></div>
       <div id="milk" class="draggable disabled"></div>
+      <div id="straw" class="draggable disabled"></div>
 
-      <!-- Final cup position with coaster -->
+      <!-- Final cup position -->
       <div id="final-cup">
         <div id="coaster-placeholder"></div>
         <div id="final-cup-image">
-          <div id="placed-cup"></div>
+          <div id="cup-empty"></div>
           <div id="cup-with-ice"></div>
           <div id="cup-with-ice-milk"></div>
           <div id="completed-latte"></div>
+          <div id="completed-latte-with-straw"></div>
           <div id="coaster-base"></div>
         </div>
       </div>
 
       <div id="complete-message">
-        MATCHA READY! 🎉
+        MATCHA LATTE READY! 🎉
         <button id="reset-button">Play Again</button>
       </div>
     </div>
