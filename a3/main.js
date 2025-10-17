@@ -10,6 +10,14 @@ let icePlaced = false;
 let milkPlaced = false;
 let matchaPoured = false;
 
+/*
+  Attribution: The illustrations (cups, bowls, ingredients, and tools) were generated using ChatGPT.
+  Interaction design and code by Julie Noh.
+*/
+
+/* Step definition: includes each stage’s tools, instructions, and bowl state 
+Created clear and helpful instructions to guide users in completing the matcha latte without confusion
+*/
 const steps = [
   {
     item: "kettle",
@@ -28,14 +36,14 @@ const steps = [
   },
   {
     item: "empty-cup",
-    instruction: "Bring the empty cup to the coaster!",
+    instruction: "Put the empty cup on the coaster!",
     bowlState: "mixed",
   },
   { item: "ice", instruction: "Add ice to the cup!", bowlState: "mixed" },
   { item: "milk", instruction: "Pour milk into the cup!", bowlState: "mixed" },
   {
     item: "bowl",
-    instruction: "Pour matcha from the bowl into the cup!",
+    instruction: "Pour whisked matcha from the bowl into the cup!",
     bowlState: "mixed",
   },
   {
@@ -45,6 +53,7 @@ const steps = [
   },
 ];
 
+/* handles mouse events and calculates the offset */
 function initDrag(e) {
   e.preventDefault();
   const target = e.target.closest(".draggable");
@@ -80,6 +89,7 @@ function initDrag(e) {
   }
 }
 
+/* Real-time position update */
 function drag(e) {
   if (!draggedElement) return;
 
@@ -101,7 +111,8 @@ function drag(e) {
     checkWhiskCircle(e.clientX, e.clientY);
   }
 }
-
+/* Whisking motion progress is calculated based on movement distance.
+Users must move the whisk at least 15 times to complete the step, providing an appropriate level of effort. */
 function checkWhiskCircle(x, y) {
   const distance = Math.sqrt(
     Math.pow(x - whiskStartX, 2) + Math.pow(y - whiskStartY, 2)
@@ -119,6 +130,7 @@ function checkWhiskCircle(x, y) {
   }
 }
 
+/* Drag stop function: When overlapping occurs, it proceeds to the next stage. */
 function stopDrag(e) {
   if (!draggedElement) return;
 
@@ -191,7 +203,7 @@ function stopDrag(e) {
     completedLatte.style.display = "block";
     completedLatte.classList.add("cup-state");
 
-    // 그릇을 빈 그릇으로 변경
+    // change to empty bowl
     updateBowl("empty");
 
     resetItemPosition(draggedElement);
@@ -222,11 +234,12 @@ function stopDrag(e) {
   draggedElement = null;
 }
 
+/* Function to reset elements to their original positions */
 function resetItemPosition(element) {
   const positions = {
-    kettle: { left: "40px", top: "100px" },
-    spoon: { left: "40px", top: "300px" },
-    whisk: { left: "40px", top: "500px" },
+    kettle: { left: "100px", top: "170px" },
+    spoon: { left: "100px", top: "370px" },
+    whisk: { left: "100px", top: "570px" },
     "empty-cup": { left: "calc(100% - 220px)", top: "120px" },
     ice: { left: "calc(100% - 160px)", top: "360px" },
     milk: { left: "calc(100% - 180px)", top: "500px" },
@@ -269,6 +282,7 @@ function updateBowl(state) {
   }
 }
 
+/* Proceed to next step: deactivate current tool and activate the next one */
 function nextStep() {
   const current = steps[currentStep];
 
@@ -289,11 +303,16 @@ function nextStep() {
   }
 }
 
+/* Display completion message */
 function showComplete() {
   const msg = document.getElementById("complete-message");
   msg.classList.add("show");
 }
 
+/* 
+Game reset: reset all states
+Set both display and visibility properties to ensure a perfect reset
+*/
 function resetGame() {
   currentStep = 0;
   whiskCircleProgress = 0;

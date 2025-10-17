@@ -1,11 +1,20 @@
+/*
+  Attribution: The illustrations (cups, bowls, ingredients, and tools) were generated using ChatGPT.
+  Design and styling by Julie Noh.
+*/
+
+/* CSS reset applied to ensure consistent rendering across browsers
+Using box-sizing: border-box simplifies layout calculations */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body background: a green gradient (#e8f5e9 → #c8e6c9) inspired by the color of matcha latte */
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
   display: flex;
   justify-content: center;
@@ -14,6 +23,7 @@ body {
   overflow: hidden;
 }
 
+/* The game container is set with generous spacing to avoid a visually heavy or cramped layout. */
 #game-container {
   width: 1400px;
   height: 900px;
@@ -24,12 +34,13 @@ body {
   overflow: hidden;
 }
 
+/* Fixed at the top to maintain visibility, and the green background aligns with the matcha theme */
 #instruction {
   position: absolute;
-  top: 20px;
+  top: 90px;
   left: 50%;
   transform: translateX(-50%);
-  background: #4caf50;
+  background: #609147;
   color: white;
   padding: 15px 30px;
   border-radius: 30px;
@@ -39,6 +50,7 @@ body {
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
+/* Draggable elements: indicate interactivity through cursor changes, providing a clear affordance */
 .draggable {
   position: absolute;
   cursor: grab;
@@ -55,34 +67,38 @@ body {
   transition: none;
   transform: none !important;
 }
-
+/* set to 0.5 opacity to make disabled elements visually distinct */
 .disabled {
   opacity: 0.5 !important;
   cursor: not-allowed !important;
 }
 
-/* Center bowl */
+/* Center bowl: Precisely centered using calc() */
 #bowl {
   width: 440px;
   height: 440px;
   position: absolute;
   left: calc(50% - 220px);
-  top: calc(35% - 220px);
+  top: calc(35% - 170px);
   background-image: url("assets/bowl_empty.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-/* Final cup position - 코스터 2배 크기 */
+/* Final cup position 
+For cleaner visual alignment, the cup is placed below the bowl. 
+*/
 #final-cup {
   width: 720px;
   height: 440px;
   position: absolute;
-  left: calc(50% - 360px);
-  bottom: 80px;
+  left: calc(50% - 355px);
+  bottom: 50px;
 }
 
+/* A coaster object was added to clearly indicate where users should place the cup, 
+improving visual guidance and usability. */
 #coaster-placeholder {
   width: 720px;
   height: 200px;
@@ -93,9 +109,10 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  bottom: 30px;
+  bottom: -20px;
 }
 
+/* Layers are managed using z-index */
 #coaster-base {
   width: 720px;
   height: 200px;
@@ -107,7 +124,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   z-index: 1;
-  bottom: 30px;
+  bottom: -20px;
 }
 
 #final-cup-image {
@@ -117,6 +134,8 @@ body {
   position: relative;
 }
 
+/* Each step is displayed one by one, visualizing the progress.
+The gradual completion process provides a sense of achievement for the user. */
 .cup-state {
   width: 300px;
   height: 340px;
@@ -125,7 +144,7 @@ body {
   background-position: center !important;
   display: none;
   position: absolute;
-  top: 50px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -149,41 +168,44 @@ body {
 
 #completed-latte-with-straw {
   background-image: url("assets/completed_latte_with_straw.png");
-  top: 30px;
+  top: 80px;
 }
+
+/* The seven side elements were evenly spaced and arranged to subtly wrap around the central bowl and coaster, 
+creating a balanced composition. */
 
 /* Left side tools */
 #kettle {
   width: 220px;
   height: 180px;
-  left: 40px;
-  top: 100px;
+  left: 100px;
+  top: 170px;
   background-image: url("assets/kettle.png");
 }
 
 #spoon {
   width: 140px;
   height: 180px;
-  left: 40px;
-  top: 300px;
+  left: 100px;
+  top: 370px;
   background-image: url("assets/spoon.png");
 }
 
 #whisk {
   width: 140px;
   height: 180px;
-  left: 40px;
-  top: 500px;
+  left: 140px;
+  top: 570px;
   background-image: url("assets/whisk.png");
 }
 
-/* Right side ingredients - 모두 처음부터 보임 */
+/* Right side ingredients */
 #empty-cup {
   width: 180px;
   height: 220px;
   position: absolute;
-  left: calc(100% - 220px);
-  top: 120px;
+  left: calc(100% - 280px);
+  top: 100px;
   background-image: url("assets/cup_empty.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -195,8 +217,8 @@ body {
   width: 120px;
   height: 120px;
   position: absolute;
-  left: calc(100% - 160px);
-  top: 360px;
+  left: calc(100% - 220px);
+  top: 340px;
   background-image: url("assets/ice.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -208,8 +230,8 @@ body {
   width: 140px;
   height: 200px;
   position: absolute;
-  left: calc(100% - 180px);
-  top: 500px;
+  left: calc(100% - 240px);
+  top: 480px;
   background-image: url("assets/milk.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -221,8 +243,8 @@ body {
   width: 100px;
   height: 180px;
   position: absolute;
-  left: calc(100% - 200px);
-  top: 650px;
+  left: calc(100% - 260px);
+  top: 670px;
   background-image: url("assets/straw.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -230,6 +252,8 @@ body {
   display: block;
 }
 
+/* Completion pop-up: uses a three-step keyframe sequence to create a lively popping effect.
+The overshoot motion (scaling up to 110%) combined with rotation to both directions emphasizes a fun and energetic mood. */
 @keyframes celebrate {
   0% {
     transform: translate(-50%, -50%) scale(0) rotate(-10deg);
@@ -241,13 +265,14 @@ body {
     transform: translate(-50%, -50%) scale(1) rotate(0deg);
   }
 }
-
+/* Completion message is placed at the center of the screen with a strong visual presence, 
+ ensuring that users immediately notice the moment of completion. */
 #complete-message {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+  background: linear-gradient(135deg, #66ab68 0%, #8bc34a 100%);
   color: white;
   padding: 40px 60px;
   border-radius: 20px;
@@ -260,15 +285,16 @@ body {
   align-items: center;
   gap: 20px;
 }
-
+/* 0.5-second animation minimizes waiting time and uses a smooth ease-out transition for a natural finish */
 #complete-message.show {
   display: flex !important;
   animation: celebrate 0.5s ease-out forwards !important;
 }
 
+/* The reset button includes a click effect to give users clear interaction feedback. */
 #reset-button {
   background: white;
-  color: #4caf50;
+  color: #438e45;
   border: none;
   padding: 15px 40px;
   border-radius: 30px;

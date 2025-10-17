@@ -9,17 +9,20 @@
   </head>
   <body>
     <div id="game-container">
+      <!-- Placed at the top center to clearly guide the user's next action -->
       <div id="instruction">Pour water into the bowl with the kettle!</div>
 
       <!-- Center bowl -->
       <div id="bowl"></div>
 
-      <!-- Left side tools -->
+      <!-- uses a sequential activation method to clarify the order of actions
+Tools that are currently unavailable are visually distinguished with a “disabled” class -->
+      <!-- Left side elements -->
       <div id="kettle" class="draggable"></div>
       <div id="spoon" class="draggable disabled"></div>
       <div id="whisk" class="draggable disabled"></div>
 
-      <!-- Right side ingredients -->
+      <!-- Right side elements -->
       <div id="empty-cup" class="draggable disabled"></div>
       <div id="ice" class="draggable disabled"></div>
       <div id="milk" class="draggable disabled"></div>
@@ -37,11 +40,18 @@
           <div id="coaster-base"></div>
         </div>
       </div>
-
+      <!-- Completion message: Provides a sense of achievement and encourages replay
+        Added emojis to make it more engaging.
+Future potential: adding social sharing features -->
       <div id="complete-message">
-        MATCHA LATTE READY! 🎉
-        <button id="reset-button">Play Again</button>
+        🎉 Matcha Latte Ready! 🍵
+        <button id="reset-button">Make another cup</button>
       </div>
     </div>
   </body>
 </html>
+
+<!-- 
+  Attribution: The illustrations (cups, bowls, ingredients, and tools) were generated using ChatGPT.
+  All interaction design, layout, and code by Julie Noh.
+-->
