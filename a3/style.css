@@ -152,6 +152,7 @@ The gradual completion process provides a sense of achievement for the user. */
   z-index: 2;
 }
 
+/* each step of cups */
 #cup-empty {
   background-image: url("assets/cup_empty.png");
 }
