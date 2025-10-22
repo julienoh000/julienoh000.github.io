@@ -237,12 +237,12 @@ function stopDrag(e) {
 /* Function to reset elements to their original positions */
 function resetItemPosition(element) {
   const positions = {
-    kettle: { left: "100px", top: "170px" },
-    spoon: { left: "100px", top: "370px" },
-    whisk: { left: "100px", top: "570px" },
-    "empty-cup": { left: "calc(100% - 220px)", top: "120px" },
-    ice: { left: "calc(100% - 160px)", top: "360px" },
-    milk: { left: "calc(100% - 180px)", top: "500px" },
+    kettle: { left: "100px", top: "160px" },
+    spoon: { left: "100px", top: "360px" },
+    whisk: { left: "140px", top: "560px" },
+    "empty-cup": { left: "calc(100% - 220px)", top: "60px" },
+    ice: { left: "calc(100% - 220px)", top: "295px" },
+    milk: { left: "calc(100% - 240px)", top: "445px" },
     straw: { left: "calc(100% - 200px)", top: "650px" },
     bowl: { left: "calc(50% - 220px)", top: "calc(35% - 220px)" },
   };
@@ -358,18 +358,14 @@ function resetGame() {
     }
 
     const positions = {
-      kettle:
-        "position: absolute; display: block; visibility: visible; left: 40px; top: 100px;",
-      spoon:
-        "position: absolute; display: block; visibility: visible; left: 40px; top: 300px;",
-      whisk:
-        "position: absolute; display: block; visibility: visible; left: 40px; top: 500px;",
-      "empty-cup":
-        "position: absolute; display: block; visibility: visible; left: calc(100% - 220px); top: 120px;",
-      ice: "position: absolute; display: block; visibility: visible; left: calc(100% - 160px); top: 360px;",
-      milk: "position: absolute; display: block; visibility: visible; left: calc(100% - 180px); top: 500px;",
-      straw:
-        "position: absolute; display: block; visibility: visible; left: calc(100% - 200px); top: 650px;",
+      kettle: { left: "100px", top: "160px" },
+      spoon: { left: "100px", top: "360px" },
+      whisk: { left: "140px", top: "560px" },
+      "empty-cup": { left: "calc(100% - 220px)", top: "60px" },
+      ice: { left: "calc(100% - 220px)", top: "295px" },
+      milk: { left: "calc(100% - 240px)", top: "445px" },
+      straw: { left: "calc(100% - 200px)", top: "650px" },
+      bowl: { left: "calc(50% - 220px)", top: "calc(35% - 220px)" },
     };
 
     el.style.cssText = positions[id];

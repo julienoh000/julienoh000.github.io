@@ -30,14 +30,14 @@ body {
   background: white;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: absolute;
   overflow: hidden;
 }
 
 /* Fixed at the top to maintain visibility, and the green background aligns with the matcha theme */
 #instruction {
   position: absolute;
-  top: 90px;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   background: #609147;
@@ -57,6 +57,7 @@ body {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
+  z-index: 10;
 }
 
 .draggable:active {
@@ -79,11 +80,12 @@ body {
   height: 440px;
   position: absolute;
   left: calc(50% - 220px);
-  top: calc(35% - 170px);
+  top: calc(35% - 220px);
   background-image: url("assets/bowl_empty.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  z-index: 5;
 }
 
 /* Final cup position 
@@ -94,7 +96,7 @@ For cleaner visual alignment, the cup is placed below the bowl.
   height: 440px;
   position: absolute;
   left: calc(50% - 355px);
-  bottom: 50px;
+  bottom: 100px;
 }
 
 /* A coaster object was added to clearly indicate where users should place the cup, 
@@ -109,7 +111,7 @@ improving visual guidance and usability. */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  bottom: -20px;
+  bottom: -40px;
 }
 
 /* Layers are managed using z-index */
@@ -124,7 +126,7 @@ improving visual guidance and usability. */
   background-repeat: no-repeat;
   background-position: center;
   z-index: 1;
-  bottom: -20px;
+  bottom: -40px;
 }
 
 #final-cup-image {
@@ -144,7 +146,7 @@ The gradual completion process provides a sense of achievement for the user. */
   background-position: center !important;
   display: none;
   position: absolute;
-  top: 100px;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -168,7 +170,7 @@ The gradual completion process provides a sense of achievement for the user. */
 
 #completed-latte-with-straw {
   background-image: url("assets/completed_latte_with_straw.png");
-  top: 80px;
+  top: 100px;
 }
 
 /* The seven side elements were evenly spaced and arranged to subtly wrap around the central bowl and coaster, 
@@ -179,7 +181,7 @@ creating a balanced composition. */
   width: 220px;
   height: 180px;
   left: 100px;
-  top: 170px;
+  top: 160px;
   background-image: url("assets/kettle.png");
 }
 
@@ -187,7 +189,7 @@ creating a balanced composition. */
   width: 140px;
   height: 180px;
   left: 100px;
-  top: 370px;
+  top: 360px;
   background-image: url("assets/spoon.png");
 }
 
@@ -195,7 +197,7 @@ creating a balanced composition. */
   width: 140px;
   height: 180px;
   left: 140px;
-  top: 570px;
+  top: 560px;
   background-image: url("assets/whisk.png");
 }
 
@@ -205,7 +207,7 @@ creating a balanced composition. */
   height: 220px;
   position: absolute;
   left: calc(100% - 280px);
-  top: 100px;
+  top: 60px;
   background-image: url("assets/cup_empty.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -218,7 +220,7 @@ creating a balanced composition. */
   height: 120px;
   position: absolute;
   left: calc(100% - 220px);
-  top: 340px;
+  top: 295px;
   background-image: url("assets/ice.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -231,7 +233,7 @@ creating a balanced composition. */
   height: 200px;
   position: absolute;
   left: calc(100% - 240px);
-  top: 480px;
+  top: 445px;
   background-image: url("assets/milk.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -244,7 +246,7 @@ creating a balanced composition. */
   height: 180px;
   position: absolute;
   left: calc(100% - 260px);
-  top: 670px;
+  top: 650px;
   background-image: url("assets/straw.png");
   background-size: contain;
   background-repeat: no-repeat;
